@@ -49,6 +49,9 @@ nav ul a.custom-a {
     cursor: pointer;
     display: none;
 }
+#button-process{
+    font-size: 14px;
+}
 #container {
     margin: 50px auto;
     width: 750px;
