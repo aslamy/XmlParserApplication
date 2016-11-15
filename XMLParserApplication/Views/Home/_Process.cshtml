@@ -97,16 +97,19 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+       
         $(".info")
-            .click(function() {
+            .click(function (e) {
+                e.preventDefault();
                 $(this).toggleClass("active");
                 $(this).parent().next("tr.sub-edit").removeClass("active");
                 $(this).parent().next("tr.sub-edit").next("tr.sub-info").toggleClass("active");
             });
 
         $(".edit")
-            .click(function() {
-                $(".info").removeClass("active");
+            .click(function (e) {
+                e.preventDefault();
+                $(this).siblings(".info").removeClass("active");
                 $(this).parent().next("tr.sub-edit").next("tr.sub-info").removeClass("active");
                 $(this).parent().next("tr.sub-edit").toggleClass("active");
             });
