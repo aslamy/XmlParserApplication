@@ -9,30 +9,25 @@
             <input type="submit" id="button-process" value="Bearbeta">
         </form>
     </div>
-
     <div id="table-holder"></div>
-    <script type="text/javascript">
-
-        $(document)
-            .ready(function() {
-
-                $("#form-process")
-                    .submit(function(e) {
-                        $.ajax({
-                            type: "POST",
-                            url: '@Url.Action("Process", "Home")',
-                            data: $("#form-process").serialize(),
-                            beforeSend: function() {
-                                $('#table-holder')
-                                    .html("<img class='loading' src='../../Content/images/loader.gif'/><img class='loading-egg' src='../../Content/images/dancingEgg.gif'/>");
-                            },
-                            success: function(data) {
-                                $('#table-holder').html(data);
-                            }
-                        });
-                        e.preventDefault(); // avoid to execute the actual submit of the form.
-                    });
-            });
-
-    </script>
 </div>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#form-process").submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Process", "Home")',
+                    data: $("#form-process").serialize(),
+                    beforeSend: function() {
+                        $('#table-holder')
+                            .html("<img class='loading' src='../../Content/images/loader.gif'/><img class='loading-egg' src='../../Content/images/dancingEgg.gif'/>");
+                    },
+                    success: function(data) {
+                        $('#table-holder').html(data);
+                    }
+                });
+            });
+        });
+</script>

@@ -1,152 +1,138 @@
 ﻿@model IEnumerable<XMLParserApplication.Models.Item>
 <table id="main-table">
     <thead>
-    <tr>
-        <th colspan="2"></th>
-        <th>
-            @Ajax.ActionLink("Rubrik", "Sort", new {sortOrder = ViewBag.NameSortParm, sortName = "title"}, new AjaxOptions
-            {
-                HttpMethod = "GET",
-                UpdateTargetId = "table-holder",
-                InsertionMode = InsertionMode.Replace
-            }, new {@class = "sort-link"})
-        </th>
-        <th>
-            @Ajax.ActionLink("Datum", "Sort", new {sortOrder = ViewBag.NameSortParm, sortName = "date"}, new AjaxOptions
-            {
-                HttpMethod = "GET",
-                UpdateTargetId = "table-holder",
-                InsertionMode = InsertionMode.Replace
-            }, new {@class = "sort-link"})
-        </th>
-        <th>Länk</th>
-    </tr>
+        <tr>
+            <th colspan="2"></th>
+            <th>
+                @Ajax.ActionLink("Rubrik", "Sort", new { sortOrder = ViewBag.NameSortParm, sortName = "title" }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "table-holder", InsertionMode = InsertionMode.Replace }, new { @class = "sort-link" })
+            </th>
+            <th>
+                @Ajax.ActionLink("Datum", "Sort", new { sortOrder = ViewBag.NameSortParm, sortName = "date" }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "table-holder", InsertionMode = InsertionMode.Replace }, new { @class = "sort-link" })
+            </th>
+            <th>Länk</th>
+        </tr>
     </thead>
     <tbody id="data">
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td id="info@(item.Id)" class="info"></td>
-            <td class="edit"></td>
-            <td>@(item.Title)</td>
-            <td>@(item.PublishedDate)</td>
-            <td>
-                <a href="@(item.Link)" target="_blank">länk</a>
-            </td>
-        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td id="info@(item.Id)" class="info"></td>
+                <td class="edit"></td>
+                <td>@(item.Title)</td>
+                <td>@(item.PublishedDate)</td>
+                <td>
+                    <a href="@(item.Link)" target="_blank">länk</a>
+                </td>
+            </tr>
 
-        <tr class="sub-edit">
-            <td colspan="5">
-                <form method="post" class="form-edit">
+            <tr class="sub-edit">
+                <td colspan="5">
+                    <form method="post" class="form-edit">
+                        <table id="sub-table">
+                            <tr>
+                                <td>
+                                    <b>Namn:</b>
+                                </td>
+                                <td colspan="2">
+                                    <input type="hidden" id="item-id" value="@item.Id" name="id">
+                                    <input type="text" id="item-name" value="@item.Name" placeholder="Mata in namn..." name="name">
+                                </td>
+                                <td>
+                                    <b>Email:</b>
+                                </td>
+                                <td colspan="2">
+                                    <input type="text" id="item-email" value="@item.Email" placeholder="Mata in email..." name="email">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Kommentar:</b>
+                                </td>
+                                <td colspan="4">
+                                    <input type="text" id="item-comments" value="@item.Comment" placeholder="Mata in kommentar..." name="comment">
+                                </td>
+                                <td>
+                                    <input type="submit" id="button-spara" value="Spara">
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </td>
+            </tr>
+            <tr id="sub-info@(item.Id)" class="sub-info">
+                <td colspan="5">
                     <table id="sub-table">
                         <tr>
-                            <td>
-                                <b>Namn:</b>
-                            </td>
-                            <td colspan="2">
-                                <input type="hidden" id="item-id" value="@item.Id" name="id">
-                                <input type="text" id="item-name" value="@item.Name" placeholder="Mata in namn..." name="name">
-                            </td>
-                            <td>
-                                <b>Email:</b>
-                            </td>
-                            <td colspan="2">
-                                <input type="text" id="item-email" value="@item.Email" placeholder="Mata in email..." name="email">
-                            </td>
+                            <td><b>Beskrivning:</b></td>
+                            <td colspan="3">@(item.Description)</td>
                         </tr>
                         <tr>
-                            <td>
-                                <b>Kommentar:</b>
-                            </td>
-                            <td colspan="4">
-                                <input type="text" id="item-comments" value="@item.Comment" placeholder="Mata in kommentar..." name="comment">
-                            </td>
-                            <td>
-                                <input type="submit" id="button-spara" value="Spara">
-                            </td>
+                            <td><b>Kategori:</b> </td>
+                            <td colspan="3">@(item.Category)</td>
+                        </tr>
+                        <tr>
+                            @if (item.Name != null)
+                            {
+                                <td><b>Namn:</b></td>
+                                <td>@(item.Name)</td>
+                            } @if (item.Email != null)
+                            {
+                                <td><b>Email:</b></td>
+                                <td>@(item.Email)</td>
+                            }
+                        </tr>
+                        <tr>
+                            @if (item.Comment != null)
+                            {
+                                <td><b>Kommentar:</b></td>
+                                <td colspan="3">@(item.Comment)</td>
+                            }
                         </tr>
                     </table>
-                </form>
-            </td>
-        </tr>
-        <tr id="sub-info@(item.Id)" class="sub-info">
-            <td colspan="5">
-                <table id="sub-table">
-                    <tr>
-                        <td><b>Beskrivning:</b></td>
-                        <td colspan="3">@(item.Description)</td>
-                    </tr>
-                    <tr>
-                        <td><b>Kategori:</b> </td>
-                        <td colspan="3">@(item.Category)</td>
-                    </tr>
-                    <tr>
-                        @if (item.Name!=null)
-                        {
-                            <td><b>Namn:</b></td>
-                            <td>@(item.Name)</td>
-                        }
-                        @if (item.Email != null)
-                        {
-                            <td><b>Email:</b></td>
-                            <td>@(item.Email)</td>
-                        }
-                    </tr>
-                    <tr>
-                        @if (item.Comment != null)
-                        {
-                            <td><b>Kommentar:</b></td>
-                            <td colspan="3">@(item.Comment)</td>
-                        }
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
 <script type="text/javascript">
-    $(document)
-        .ready(function() {
-            $(".info")
-                .click(function() {
-                    $(this).toggleClass("active");
-                    $(this).parent().next("tr.sub-edit").removeClass("active");
-                    $(this).parent().next("tr.sub-edit").next("tr.sub-info").toggleClass("active");
-                });
-
-            $(".edit")
-                .click(function() {
-                    $(".info").removeClass("active");
-                    $(this).parent().next("tr.sub-edit").next("tr.sub-info").removeClass("active");
-                    $(this).parent().next("tr.sub-edit").toggleClass("active");
-                });
-
-            $(".form-edit").submit(function (e) {
-                e.preventDefault();
-                var formData = $(this).serializeArray();
-                var id;
-
-                $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("Edit", "Home")',
-                    data: formData,
-                    beforeSend: function () {
-                    },
-                    success: function (data) {
-                        $('#table-holder').html(data);
-                        $(formData).each(function (index,object) {
-                            if (object.name==="id") {
-                                id = object.value;
-                            }
-                        });
-                        $('#info' + id).addClass("active");
-                        $('#sub-info' + id).addClass("active");
-                    }
-                });
+    $(document).ready(function () {
+        $(".info")
+            .click(function() {
+                $(this).toggleClass("active");
+                $(this).parent().next("tr.sub-edit").removeClass("active");
+                $(this).parent().next("tr.sub-edit").next("tr.sub-info").toggleClass("active");
             });
 
+        $(".edit")
+            .click(function() {
+                $(".info").removeClass("active");
+                $(this).parent().next("tr.sub-edit").next("tr.sub-info").removeClass("active");
+                $(this).parent().next("tr.sub-edit").toggleClass("active");
+            });
+
+        $(".form-edit").submit(function(e) {
+            e.preventDefault();
+            var formData = $(this).serializeArray();
+            var id;
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Edit", "Home")',
+                data: formData,
+                beforeSend: function() {},
+                success: function(data) {
+                    $('#table-holder').html(data);
+                    $(formData).each(function(index, object) {
+                        if (object.name === "id") {
+                            id = object.value;
+                        }
+                    });
+                    $('#info' + id).addClass("active");
+                    $('#sub-info' + id).addClass("active");
+                }
+            });
         });
 
+        });
 </script>
