@@ -20,17 +20,17 @@ namespace XMLParserApplication.Controllers
             return View();
         }
 
-        public PartialViewResult Process(string link)
+        public ActionResult Process(string link)
         {
- 
-         /*   var valid = IsValidUrl(link);
-            if (!valid)
+            Rss rss;
+            try
             {
-                return Content("Felaktig länk!"); ;
-            }*/
-            var xmlParser = new XmlParser<Rss>();
-            
-            var rss = xmlParser.Parse(link);
+                var xmlParser = new XmlParser<Rss>();
+                rss = xmlParser.Parse(link);
+            }catch{
+                return Content("Felaktig länk!");
+            }
+
             items = rss.Channel.Items.Take(5);
             int i = 0;
             foreach (var item in items)
@@ -76,30 +76,6 @@ namespace XMLParserApplication.Controllers
             item.Email = model.Email;
             item.Comment = model.Comment;
             return PartialView("_Process", items);
-        }
-
-
-        private static bool IsValidUrl(string url)
-        {
-            try
-            {
-                HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
-                if (request != null)
-                {
-                    request.Method = "HEAD";
-                    HttpWebResponse response = request.GetResponse() as HttpWebResponse;
-                    if (response != null)
-                    {
-                        response.Close();
-                        return (response.StatusCode == HttpStatusCode.OK);
-                    }
-                }
-            }
-            catch
-            {
-                return false;
-            }
-            return false;
         }
     }
 }
