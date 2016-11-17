@@ -117,8 +117,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CustomGridSystem.css" />
     <Content Include="Content\images\dancingEgg.gif" />
     <Content Include="Content\images\details_close.png" />

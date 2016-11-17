@@ -24,71 +24,74 @@
                     <a href="@(item.Link)" target="_blank">länk</a>
                 </td>
             </tr>
-
             <tr class="sub-edit">
                 <td colspan="5">
                     <form method="post" class="form-edit">
-                        <table id="sub-table">
-                            <tr>
-                                <td>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-12">
                                     <b>Namn:</b>
-                                </td>
-                                <td colspan="2">
+                                </div>
+                                <div class="col-md-12">
                                     <input type="hidden" id="item-id" value="@item.Id" name="id">
                                     <input type="text" id="item-name" value="@item.Name" placeholder="Mata in namn..." name="name">
-                                </td>
-                                <td>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12">
                                     <b>Email:</b>
-                                </td>
-                                <td colspan="2">
+                                </div>
+                                <div class="col-md-12">
                                     <input type="text" id="item-email" value="@item.Email" placeholder="Mata in email..." name="email">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
+                                </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                            <div class="12">
+                                <div class="col-md-12">
                                     <b>Kommentar:</b>
-                                </td>
-                                <td colspan="4">
+                                </div>
+                                <div class="col-md-8">
                                     <input type="text" id="item-comments" value="@item.Comment" placeholder="Mata in kommentar..." name="comment">
-                                </td>
-                                <td>
-                                    <input type="submit" id="button-spara" value="Spara">
-                                </td>
-                            </tr>
-                        </table>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                    <input type="submit" id="button-save" value="Spara">
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </td>
             </tr>
             <tr id="sub-info@(item.Id)" class="sub-info">
                 <td colspan="5">
-                    <table id="sub-table">
-                        <tr>
-                            <td><b>Beskrivning:</b></td>
-                            <td colspan="3">@(item.Description)</td>
-                        </tr>
-                        <tr>
-                            <td><b>Kategori:</b> </td>
-                            <td colspan="3">@(item.Category)</td>
-                        </tr>
-                        <tr>
-                            @if (item.Name != null)
-                            {
-                                <td><b>Namn:</b></td>
-                                <td>@(item.Name)</td>
-                            } @if (item.Email != null)
-                            {
-                                <td><b>Email:</b></td>
-                                <td>@(item.Email)</td>
-                            }
-                        </tr>
-                        <tr>
-                            @if (item.Comment != null)
-                            {
-                                <td><b>Kommentar:</b></td>
-                                <td colspan="3">@(item.Comment)</td>
-                            }
-                        </tr>
-                    </table>
+                    <div class="row">
+                        <div class="col-md-2"><b>Beskrivning:</b></div>
+                        <div class="col-md-10">@(item.Description)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"><b>Kategori:</b></div>
+                        <div class="col-md-10">@(item.Category)</div>
+                    </div>
+                    <div class="row">
+                        @if (item.Name != null)
+                        {
+                            <div class="col-md-2"><b>Namn:</b></div>
+                            <div class="col-md-4">@(item.Name)</div>
+                        }
+                
+                        @if (item.Email != null)
+                        {
+                            <div class="col-md-2"><b>Email:</b></div>
+                            <div class="col-md-4">@(item.Email)</div>
+                        }                    
+                    </div>
+                    <div class="row">
+                        @if (item.Comment != null)
+                        {
+                            <div class="col-md-2"><b>Kommentar:</b></div>
+                            <div class="col-md-10">@(item.Comment)</div>
+                        }
+                    </div>
                 </td>
             </tr>
         }
@@ -97,7 +100,6 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-       
         $(".info")
             .click(function (e) {
                 e.preventDefault();
@@ -136,6 +138,5 @@
                 }
             });
         });
-
-        });
+    });
 </script>

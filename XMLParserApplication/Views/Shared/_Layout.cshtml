@@ -6,6 +6,8 @@
     <title>Rubrik</title>
 
     <link href="~/Content/StyleSheet.css" rel="stylesheet"/>
+   
+    <link href="~/Content/CustomGridSystem.css" rel="stylesheet" />
 
     <script src="~/Scripts/jquery-1.8.0.min.js"></script>
 
@@ -13,7 +15,7 @@
 
 </head>
 <body>
-<header>Rubrik</header>
+<header>LOGO</header>
 
 <nav>
     <ul>
@@ -37,11 +39,9 @@
 
 </nav>
 <script>
-    $('.handle')
-        .on('click',
-            function() {
-                $('nav ul').toggleClass('showing');
-            });
+    $('.handle').on('click', function () {
+        $('nav ul').toggleClass('showing');
+    });
 </script>
 @RenderBody()
 </body>

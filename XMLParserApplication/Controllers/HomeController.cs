@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using System.Xml.Linq;
 using XMLParserApplication.Models;
 using XMLParserApplication.Models.ViewModels;
 
@@ -27,7 +22,9 @@ namespace XMLParserApplication.Controllers
             {
                 var xmlParser = new XmlParser<Rss>();
                 rss = xmlParser.Parse(link);
-            }catch{
+            }
+            catch
+            {
                 return Content("Felaktig länk!");
             }
 

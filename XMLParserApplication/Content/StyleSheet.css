@@ -73,20 +73,7 @@ nav ul a.custom-a {
     text-align: left;
     font-size: 14px;
 }
-#sub-table {
-    padding: 0;
-    margin: 0;
-    border-collapse: collapse;
-    width: 100%;
-    /*border: none;*/
-}
-#sub-table td {
-    padding: 10px 20px;
-    border: 1px solid #ccc;
-    text-align: left;
-    font-size: 13px;
-    border: none;
-}
+
 .edit:hover,
 .info:hover {
     background-color: #ccc;
@@ -140,6 +127,13 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
 }
+
+#button-save{
+
+    padding: 13px 20px;
+    margin: 0;
+}
+
 input[type=submit]:hover {
     background-color: #245e86;
 }
